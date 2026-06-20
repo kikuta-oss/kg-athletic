@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金沢学院大学 体育会</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Noto+Serif+JP:wght@400;700&family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cr:#8B0000; --cr-hi:#A80020; --cr-d:#620000; --cr-glow:rgba(139,0,0,0.18);
+  --white:#FFFFFF; --off:#F7F5F5; --gray:#EDE9E9; --gray-m:#A09090; --gray-d:#6A5A5A;
+  --black:#0E0808; --text:#1A0E0E;
+  --navy:#0D1A3A; /* breadcrumb/accent dark */
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:'DM Sans','Noto Sans JP',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;background:var(--cr-d);
+  border-bottom:2px solid var(--cr-hi);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 0 0 36px;
+}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-logo-mark{
+  width:34px;height:34px;border-radius:2px;
+  background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.nav-logo-mark svg{width:22px;height:22px;}
+.nav-title{
+  font-family:'Noto Serif JP',serif;font-size:13px;font-weight:700;
+  color:var(--white);letter-spacing:2px;line-height:1.3;
+}
+.nav-title small{
+  display:block;font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.55);font-weight:600;
+}
+.nav-links{display:flex;list-style:none;height:60px;}
+.nav-links li a{
+  display:flex;align-items:center;padding:0 20px;height:60px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:2px;
+  color:rgba(255,255,255,0.55);text-decoration:none;
+  border-left:1px solid rgba(255,255,255,0.1);
+  transition:all 0.15s;position:relative;
+}
+.nav-links li a::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--white);transform:scaleX(0);transition:transform 0.15s;
+}
+.nav-links li a:hover,.nav-links li a.active{color:var(--white);background:rgba(0,0,0,0.15);}
+.nav-links li a.active::after,.nav-links li a:hover::after{transform:scaleX(1);}
+
+/* breadcrumb-style sub */
+.nav-sub{
+  background:var(--off);border-bottom:1px solid var(--gray);
+  padding:0 36px;height:36px;display:flex;align-items:center;gap:8px;
+  font-size:11px;color:var(--gray-m);letter-spacing:0.5px;
+  position:fixed;top:60px;left:0;right:0;z-index:199;
+}
+.nav-sub a{color:var(--cr);text-decoration:none;font-weight:700;}
+.nav-sub a:hover{text-decoration:underline;}
+.nav-sub span{color:var(--gray-m);}
+
+.page{display:none;min-height:100vh;padding-top:96px;}
+.page.active{display:block;}
+
+/* ═══════════════════════
+   TOP PAGE
+═══════════════════════ */
+
+/* HERO */
+.hero{
+  min-height:86vh;
+  background:var(--cr-d);
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+/* subtle grid pattern */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+  background-size:56px 56px;z-index:0;
+}
+/* diagonal right overlay */
+.hero::after{
+  content:'';position:absolute;
+  right:0;top:0;bottom:0;width:52%;
+  background:rgba(0,0,0,0.12);
+  clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);
+  z-index:0;
+}
+
+.hero-l{
+  padding:72px 56px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
+}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:10px;letter-spacing:5px;
+  color:rgba(255,255,255,0.55);
+  margin-bottom:28px;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:rgba(255,255,255,0.4);}
+
+.hero-h1{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(60px,8vw,110px);
+  line-height:.88;letter-spacing:-1px;margin-bottom:14px;
+}
+.hero-h1 .line1{display:block;color:var(--white);}
+.hero-h1 .line2{
+  display:block;
+  -webkit-text-stroke:2px rgba(255,255,255,0.6);
+  color:transparent;
+}
+
+.hero-ja{
+  font-family:'Noto Serif JP',serif;font-weight:700;
+  font-size:clamp(13px,1.6vw,18px);letter-spacing:7px;
+  color:rgba(255,255,255,0.55);margin-bottom:32px;
+}
+.hero-rule{width:36px;height:2px;background:rgba(255,255,255,0.4);margin-bottom:24px;}
+.hero-copy{
+  font-size:13px;line-height:2.2;
+  color:rgba(255,255,255,0.5);
+  max-width:400px;margin-bottom:40px;font-weight:300;
+}
+
+.hero-cta{display:flex;gap:12px;}
+.btn-fill{
+  padding:13px 32px;
+  background:var(--white);color:var(--cr-d);
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:2px;
+  border:none;cursor:pointer;transition:all 0.15s;
+}
+.btn-fill:hover{background:var(--off);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.25);}
+.btn-ghost{
+  padding:13px 24px;background:transparent;
+  color:rgba(255,255,255,0.55);
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:12px;letter-spacing:2px;
+  border:1px solid rgba(255,255,255,0.25);cursor:pointer;transition:all 0.15s;
+}
+.btn-ghost:hover{border-color:var(--white);color:var(--white);}
+
+/* Hero right panels */
+.hero-r{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr 1fr;
+  gap:2px;padding:2px;
+}
+.hp{
+  position:relative;overflow:hidden;
+  display:flex;align-items:flex-end;padding:14px 16px;
+  cursor:default;
+}
+.hp-bg{position:absolute;inset:0;transition:transform 0.35s;}
+.hp:hover .hp-bg{transform:scale(1.06);}
+.hp::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(80,0,0,0.8) 0%,transparent 60%);
+}
+.hp1{grid-row:span 2;}
+.bg1{background:linear-gradient(145deg,#3d0000 0%,#700010 50%,#3d0000 100%);}
+.bg2{background:linear-gradient(145deg,#200000 0%,#500000 100%);}
+.bg3{background:linear-gradient(145deg,#1a0000 0%,#400010 100%);}
+.bg4{background:linear-gradient(145deg,#300000 0%,#600000 100%);}
+.bg5{background:linear-gradient(145deg,#250000 0%,#4a0000 100%);}
+.hp-label{
+  position:relative;z-index:1;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.45);
+}
+.hp-num{
+  position:absolute;top:10px;right:12px;z-index:1;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:44px;color:rgba(255,255,255,0.06);line-height:1;
+}
+/* vertical white stripe on panel 1 */
+.hp1::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:2px;
+  background:rgba(255,255,255,0.2);z-index:2;
+}
+
+/* Stats bar — KG site uses clean white sections */
+.stats-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--white);
+  border-bottom:3px solid var(--cr);
+}
+.sb{
+  padding:26px 32px;border-right:1px solid var(--gray);
+  display:flex;align-items:center;gap:16px;
+  position:relative;overflow:hidden;transition:background 0.15s;
+}
+.sb::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--cr);transform:scaleX(0);transform-origin:left;transition:transform 0.2s;
+}
+.sb:hover{background:var(--off);}
+.sb:hover::after{transform:scaleX(1);}
+.sb:last-child{border-right:none;}
+.sb-n{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;
+  font-size:44px;color:var(--cr);letter-spacing:-2px;line-height:1;
+}
+.sb-u{font-size:10px;font-weight:700;color:var(--text);letter-spacing:1px;}
+.sb-l{font-size:10px;color:var(--gray-m);letter-spacing:1px;margin-top:2px;}
+
+/* Ticker */
+.ticker{background:var(--cr);padding:9px 0;overflow:hidden;}
+.ticker-t{display:flex;gap:72px;animation:tk 22s linear infinite;white-space:nowrap;}
+.ti{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.9);
+  display:flex;align-items:center;gap:14px;
+}
+.ti::before{content:'◆';font-size:6px;color:rgba(255,255,255,0.5);}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Section — KG uses lots of white space, clean structure */
+.sec{padding:64px 56px;}
+.sec.bg-off{background:var(--off);}
+.sec.bg-cr{background:var(--cr-d);}
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;}
+.sec-tag{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:10px;letter-spacing:5px;color:var(--cr);margin-bottom:8px;
+}
+.sec-tag.on-dark{color:rgba(255,255,255,0.45);}
+.sec-title{
+  font-family:'Noto Serif JP',serif;font-weight:700;
+  font-size:26px;letter-spacing:3px;color:var(--text);
+}
+.sec-title.on-dark{color:var(--white);}
+.sec-link{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:2px;color:var(--gray-m);
+  background:none;border:none;cursor:pointer;transition:color 0.15s;
+}
+.sec-link:hover{color:var(--cr);}
+.sec-link.on-dark{color:rgba(255,255,255,0.3);}
+.sec-link.on-dark:hover{color:rgba(255,255,255,0.7);}
+
+/* Club cards (TOP spotlight) */
+.clubs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray);}
+.cc{
+  background:var(--white);
+  padding:28px 22px;
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:background 0.2s;
+}
+.cc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--cr);transform:scaleX(0);transform-origin:left;transition:transform 0.2s;
+}
+.cc:hover{background:var(--off);}
+.cc:hover::before{transform:scaleX(1);}
+.cc-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:4px;color:var(--gray-m);margin-bottom:8px;}
+.cc-name{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:16px;letter-spacing:1px;color:var(--text);margin-bottom:8px;}
+.cc-desc{font-size:11px;line-height:1.8;color:var(--gray-m);margin-bottom:14px;font-weight:300;}
+.cc-badge{
+  display:inline-block;padding:3px 10px;
+  border:1px solid var(--cr);color:var(--cr);
+  font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;
+}
+.cc-num{
+  position:absolute;bottom:10px;right:12px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:64px;color:rgba(139,0,0,0.05);line-height:1;letter-spacing:-3px;
+}
+
+/* NEWS (dark section) */
+.news-grid{display:grid;grid-template-columns:3fr 2fr;gap:1px;background:rgba(255,255,255,0.06);}
+.nm{background:rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;overflow:hidden;}
+.nm:hover{background:rgba(255,255,255,0.08);}
+.nm-img{
+  height:240px;
+  background:linear-gradient(135deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.1) 100%);
+  position:relative;display:flex;align-items:flex-end;
+}
+.nm-img::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+.nm-img-lbl{
+  position:relative;width:100%;padding:10px 20px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.5);
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+.nm-body{padding:24px;}
+.nm-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.nm-cat{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:9px;letter-spacing:3px;
+  border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.6);padding:3px 10px;
+}
+.nm-date{font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:1px;}
+.nm-title{font-family:'Noto Serif JP',serif;font-weight:700;font-size:18px;line-height:1.7;color:var(--white);letter-spacing:0.3px;}
+.news-side{display:flex;flex-direction:column;gap:1px;}
+.ns{
+  background:rgba(255,255,255,0.04);flex:1;padding:20px 22px;
+  cursor:pointer;transition:all 0.15s;
+  border-left:2px solid transparent;
+}
+.ns:hover{background:rgba(255,255,255,0.08);border-left-color:rgba(255,255,255,0.3);}
+.ns-cat{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.35);margin-bottom:6px;}
+.ns-title{font-size:13px;font-weight:700;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:5px;}
+.ns-date{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:1px;}
+
+/* ═══════════════════════
+   SCHEDULE PAGE
+═══════════════════════ */
+#page-schedule{background:var(--white);}
+
+.page-hdr{
+  background:var(--cr-d);padding:52px 56px 40px;
+  border-bottom:3px solid var(--cr);position:relative;overflow:hidden;
+}
+.page-hdr::after{
+  content:attr(data-bg);
+  position:absolute;right:40px;bottom:-20px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:140px;letter-spacing:-5px;color:rgba(255,255,255,0.04);
+  pointer-events:none;white-space:nowrap;
+}
+.ph-lbl{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:5px;color:rgba(255,255,255,0.45);margin-bottom:10px;}
+.ph-title{font-family:'Noto Serif JP',serif;font-weight:700;font-size:48px;color:var(--white);letter-spacing:4px;}
+
+.sch-body{padding:48px 56px;}
+.sch-m{margin-bottom:48px;}
+.sch-mlbl{
+  display:flex;align-items:center;gap:14px;margin-bottom:20px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:30px;letter-spacing:2px;color:var(--cr);
+}
+.sch-mlbl small{font-size:14px;font-style:normal;font-weight:600;letter-spacing:3px;color:var(--gray-m);}
+.sch-mlbl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--gray),transparent);}
+
+.ev{
+  display:grid;grid-template-columns:64px 1fr auto auto;
+  align-items:center;gap:20px;
+  padding:14px 16px;border-bottom:1px solid var(--gray);
+  transition:all 0.15s;cursor:default;position:relative;
+}
+.ev::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--cr);transform:scaleY(0);transform-origin:top;transition:transform 0.15s;
+}
+.ev:hover{background:var(--off);padding-left:24px;}
+.ev:hover::before{transform:scaleY(1);}
+.ev-d{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:36px;color:var(--cr);line-height:1;}
+.ev-dw{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gray-m);}
+.ev-name{font-size:14px;font-weight:700;color:var(--text);}
+.ev-club{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:3px;color:var(--cr);margin-top:3px;}
+.ev-loc{font-size:11px;color:var(--gray-m);text-align:right;line-height:1.8;}
+.ev-b{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:9px;letter-spacing:2px;padding:4px 11px;border:1px solid;white-space:nowrap;
+}
+.eb-main{border-color:var(--cr);color:var(--cr);}
+.eb-lg{border-color:var(--gray-d);color:var(--gray-d);}
+.eb-pr{border-color:var(--gray-m);color:var(--gray-m);}
+
+/* ═══════════════════════
+   NEWS PAGE
+═══════════════════════ */
+#page-news{background:var(--white);}
+.news-page-body{padding:48px 56px;}
+.news-hero{display:grid;grid-template-columns:3fr 2fr;gap:1px;background:var(--gray);margin-bottom:1px;}
+.np-main{background:var(--white);cursor:pointer;transition:background 0.15s;overflow:hidden;}
+.np-main:hover{background:var(--off);}
+.np-img{
+  height:240px;
+  background:linear-gradient(135deg,var(--cr-d) 0%,var(--cr) 60%,var(--cr-d) 100%);
+  position:relative;display:flex;align-items:flex-end;
+}
+.np-img-lbl{width:100%;padding:10px 20px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:4px;
+  color:rgba(255,255,255,0.6);background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.15);}
+.np-body{padding:24px 28px;}
+.np-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.np-cat{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:3px;border:1px solid var(--cr);color:var(--cr);padding:3px 10px;}
+.np-date{font-size:11px;color:var(--gray-m);letter-spacing:1px;}
+.np-title{font-family:'Noto Serif JP',serif;font-weight:700;font-size:19px;line-height:1.7;color:var(--text);letter-spacing:0.3px;}
+.np-side{display:flex;flex-direction:column;gap:1px;}
+.nps{
+  background:var(--white);flex:1;padding:20px 22px;
+  cursor:pointer;transition:all 0.15s;
+  border-left:3px solid transparent;
+}
+.nps:hover{background:var(--off);border-left-color:var(--cr);}
+.nps-cat{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:3px;color:var(--gray-m);margin-bottom:6px;}
+.nps-title{font-size:13px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:5px;}
+.nps-date{font-size:10px;color:var(--gray-m);letter-spacing:1px;}
+
+.nl{
+  display:grid;grid-template-columns:110px 1fr auto;gap:20px;
+  align-items:center;padding:14px 16px;border-bottom:1px solid var(--gray);
+  cursor:pointer;transition:all 0.15s;
+}
+.nl:hover{background:var(--off);padding-left:24px;}
+.nl-dt{font-size:11px;color:var(--gray-m);letter-spacing:1px;}
+.nl-ttl{font-size:13px;font-weight:700;color:var(--text);}
+
+/* ═══════════════════════
+   CLUBS PAGE
+═══════════════════════ */
+#page-clubs{background:var(--white);}
+.clubs-page-body{padding:48px 56px;}
+
+/* filter tabs — matching KG's tag-select style */
+.filter-bar{
+  display:flex;gap:6px;flex-wrap:wrap;margin-bottom:36px;
+  padding-bottom:16px;border-bottom:1px solid var(--gray);
+}
+.ftag{
+  font-family:'Noto Sans JP',sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:0.5px;
+  padding:6px 16px;border:1px solid var(--gray);
+  color:var(--gray-d);background:var(--white);
+  cursor:pointer;transition:all 0.15s;
+}
+.ftag:hover,.ftag.active{background:var(--cr);border-color:var(--cr);color:var(--white);}
+
+/* Club intro grid */
+.ci-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray);}
+.ci{
+  background:var(--white);padding:36px 28px;
+  position:relative;overflow:hidden;cursor:pointer;transition:background 0.2s;
+}
+.ci::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--cr);transform:scaleX(0);transform-origin:left;transition:transform 0.25s;
+}
+.ci:hover{background:var(--off);}
+.ci:hover::before{transform:scaleX(1);}
+.ci-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:9px;letter-spacing:5px;color:var(--gray-m);margin-bottom:7px;}
+.ci-name{font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:20px;letter-spacing:1px;color:var(--text);margin-bottom:10px;}
+.ci-voice{
+  font-size:12px;line-height:1.9;color:var(--gray-d);font-weight:300;
+  margin-bottom:18px;border-left:2px solid var(--cr);padding-left:10px;
+  font-style:italic;
+}
+.ci-row{display:flex;gap:24px;}
+.ci-sn{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:32px;color:var(--cr);letter-spacing:-1px;line-height:1;}
+.ci-sl{font-size:9px;color:var(--gray-m);letter-spacing:2px;margin-top:3px;font-weight:400;}
+.ci-bg{
+  position:absolute;right:12px;bottom:8px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;
+  font-size:88px;color:rgba(139,0,0,0.05);line-height:1;letter-spacing:-4px;
+}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--cr-d);border-top:3px solid var(--cr);
+  padding:28px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-brand{font-family:'Noto Serif JP',serif;font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:2px;}
+.footer-brand b{color:var(--white);}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-mark">
+      <!-- KGシンプルロゴマーク風 -->
+      <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="22" height="22" fill="white"/>
+        <text x="11" y="16" font-family="serif" font-weight="bold" font-size="14" fill="#620000" text-anchor="middle">金</text>
+      </svg>
+    </div>
+    <div class="nav-title">
+      <small>KANAZAWA GAKUIN UNIVERSITY</small>
+      体育会
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showPage('top',this)">TOP</a></li>
+    <li><a href="#" onclick="showPage('schedule',this)">SCHEDULE</a></li>
+    <li><a href="#" onclick="showPage('news',this)">NEWS</a></li>
+    <li><a href="#" onclick="showPage('clubs',this)">CLUBS</a></li>
+  </ul>
+</nav>
+
+<div class="nav-sub">
+  <a href="#">金沢学院大学</a>
+  <span>›</span>
+  <a href="#">学生生活</a>
+  <span>›</span>
+  <span>体育会</span>
+</div>
+
+<!-- ══════ TOP ══════ -->
+<div id="page-top" class="page active">
+
+  <section class="hero">
+    <div class="hero-l">
+      <div class="hero-eyebrow">KANAZAWA GAKUIN ATHLETIC ASSOCIATION 2025</div>
+      <h1 class="hero-h1">
+        <span class="line1">RISE</span>
+        <span class="line2">TOGETHER</span>
+      </h1>
+      <div class="hero-ja">創造と挑戦。頂点へ、共に。</div>
+      <div class="hero-rule"></div>
+      <p class="hero-copy">金沢学院大学体育会は、スポーツを通じて人間力を磨き、地域と社会に貢献する者たちの集団です。19運動部の仲間が同じ空の下で競い、支え合い、成長し続けています。</p>
+      <div class="hero-cta">
+        <button class="btn-fill" onclick="showPage('clubs',document.querySelector('.nav-links li:nth-child(4) a'))">部活を探す →</button>
+        <button class="btn-ghost" onclick="showPage('news',document.querySelector('.nav-links li:nth-child(3) a'))">最新情報</button>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="hp hp1"><div class="hp-bg bg1"></div><div class="hp-num">01</div><div class="hp-label">BASEBALL</div></div>
+      <div class="hp"><div class="hp-bg bg2"></div><div class="hp-num">02</div><div class="hp-label">SOCCER</div></div>
+      <div class="hp"><div class="hp-bg bg3"></div><div class="hp-num">03</div><div class="hp-label">KENDO</div></div>
+      <div class="hp"><div class="hp-bg bg4"></div><div class="hp-num">04</div><div class="hp-label">ATHLETICS</div></div>
+      <div class="hp"><div class="hp-bg bg5"></div><div class="hp-num">05</div><div class="hp-label">SWIMMING</div></div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="sb"><div class="sb-n">19</div><div><div class="sb-u">運動部</div><div class="sb-l">加盟部数</div></div></div>
+    <div class="sb"><div class="sb-n">3,700</div><div><div class="sb-u">名</div><div class="sb-l">学生総数</div></div></div>
+    <div class="sb"><div class="sb-n">15</div><div><div class="sb-u">回</div><div class="sb-l">野球部全国優勝</div></div></div>
+    <div class="sb"><div class="sb-n">五輪</div><div><div class="sb-u">選手</div><div class="sb-l">多数輩出</div></div></div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-t">
+      <span class="ti">硬式野球部 — 北陸大学野球 優勝15回</span>
+      <span class="ti">サッカー部 — 北信越1部リーグ参戦</span>
+      <span class="ti">オリンピック選手 多数輩出</span>
+      <span class="ti">チアリーディング部 — 全国大会出場</span>
+      <span class="ti">硬式野球部 — 北陸大学野球 優勝15回</span>
+      <span class="ti">サッカー部 — 北信越1部リーグ参戦</span>
+      <span class="ti">オリンピック選手 多数輩出</span>
+      <span class="ti">チアリーディング部 — 全国大会出場</span>
+    </div>
+  </div>
+
+  <div class="sec bg-off">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-tag">FEATURED CLUBS</div>
+        <div class="sec-title">注目の部活</div>
+      </div>
+      <button class="sec-link" onclick="showPage('clubs',document.querySelector('.nav-links li:nth-child(4) a'))">全部活を見る →</button>
+    </div>
+    <div class="clubs-grid">
+      <div class="cc"><div class="cc-tag">BASEBALL</div><div class="cc-name">硬式野球部</div><div class="cc-desc">北陸大学野球連盟所属。全国優勝15回を誇る名門。</div><div class="cc-badge">全国4回出場</div><div class="cc-num">01</div></div>
+      <div class="cc"><div class="cc-tag">SOCCER</div><div class="cc-name">サッカー部</div><div class="cc-desc">個性を活かした全員サッカーで1部リーグの頂点を目指す。</div><div class="cc-badge">北信越1部</div><div class="cc-num">02</div></div>
+      <div class="cc"><div class="cc-tag">ATHLETICS</div><div class="cc-name">陸上競技部</div><div class="cc-desc">日本インカレ優勝・全日本大学駅伝出場を目指す。</div><div class="cc-badge">全国大会出場</div><div class="cc-num">03</div></div>
+      <div class="cc"><div class="cc-tag">CHEERLEADING</div><div class="cc-name">チアリーディング部</div><div class="cc-desc">応援と競技の両立を目指し、日々楽しく練習。初心者大歓迎。</div><div class="cc-badge">全国大会出場</div><div class="cc-num">04</div></div>
+    </div>
+  </div>
+
+  <div class="sec bg-cr">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-tag on-dark">LATEST NEWS</div>
+        <div class="sec-title on-dark">最新情報</div>
+      </div>
+      <button class="sec-link on-dark" onclick="showPage('news',document.querySelector('.nav-links li:nth-child(3) a'))">すべて見る →</button>
+    </div>
+    <div class="news-grid">
+      <div class="nm">
+        <div class="nm-img"><div class="nm-img-lbl">BREAKING — 速報</div></div>
+        <div class="nm-body">
+          <div class="nm-meta"><span class="nm-cat">速報</span><span class="nm-date">2025.06.01</span></div>
+          <div class="nm-title">硬式野球部、明治神宮大会出場権を獲得。秋季リーグ優勝から全国へ挑む。</div>
+        </div>
+      </div>
+      <div class="news-side">
+        <div class="ns"><div class="ns-cat">試合結果</div><div class="ns-title">サッカー部 北信越リーグ首位をキープ</div><div class="ns-date">2025.05.28</div></div>
+        <div class="ns"><div class="ns-cat">イベント</div><div class="ns-title">2025年度 新入部員歓迎会を開催。多数が体育会へ加入。</div><div class="ns-date">2025.05.20</div></div>
+        <div class="ns"><div class="ns-cat">速報</div><div class="ns-title">チアリーディング部 全国大会出場が決定。</div><div class="ns-date">2025.05.15</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-brand">金沢学院大学 <b>体育会</b> ATHLETIC ASSOCIATION</div>
+    <div class="footer-copy">© 2025 Kanazawa Gakuin University Athletic Association</div>
+  </footer>
+</div>
+
+<!-- ══════ SCHEDULE ══════ -->
+<div id="page-schedule" class="page">
+  <div class="page-hdr" data-bg="SCHEDULE">
+    <div class="ph-lbl">— ATHLETIC SCHEDULE / 学生生活 › 体育会</div>
+    <div class="ph-title">試合・大会日程</div>
+  </div>
+  <div class="sch-body">
+    <div class="sch-m">
+      <div class="sch-mlbl">JUNE <small>2025</small></div>
+      <div class="ev"><div><div class="ev-d">08</div><div class="ev-dw">SUN</div></div><div><div class="ev-name">北陸大学野球春季リーグ 最終節</div><div class="ev-club">BASEBALL</div></div><div class="ev-loc">石川県立野球場<br>12:00〜</div><div class="ev-b eb-main">公式戦</div></div>
+      <div class="ev"><div><div class="ev-d">12</div><div class="ev-dw">THU</div></div><div><div class="ev-name">北信越大学サッカーリーグ 第7節</div><div class="ev-club">SOCCER</div></div><div class="ev-loc">金沢市民サッカー場<br>14:00〜</div><div class="ev-b eb-lg">リーグ</div></div>
+      <div class="ev"><div><div class="ev-d">15</div><div class="ev-dw">SUN</div></div><div><div class="ev-name">全日本学生剣道選手権 北信越予選</div><div class="ev-club">KENDO</div></div><div class="ev-loc">石川県武道館<br>10:00〜</div><div class="ev-b eb-main">公式戦</div></div>
+      <div class="ev"><div><div class="ev-d">21</div><div class="ev-dw">SAT</div></div><div><div class="ev-name">合同トレーニング（陸上・水泳）</div><div class="ev-club">ATHLETICS / SWIMMING</div></div><div class="ev-loc">大学グラウンド<br>07:00〜</div><div class="ev-b eb-pr">練習</div></div>
+      <div class="ev"><div><div class="ev-d">28</div><div class="ev-dw">SAT</div></div><div><div class="ev-name">北信越学生水泳選手権</div><div class="ev-club">SWIMMING</div></div><div class="ev-loc">金沢プール<br>09:00〜</div><div class="ev-b eb-main">公式戦</div></div>
+    </div>
+    <div class="sch-m">
+      <div class="sch-mlbl">JULY <small>2025</small></div>
+      <div class="ev"><div><div class="ev-d">05</div><div class="ev-dw">SAT</div></div><div><div class="ev-name">全国大学ラグビー選手権 北信越予選</div><div class="ev-club">RUGBY</div></div><div class="ev-loc">金沢市工業団地グラウンド<br>13:00〜</div><div class="ev-b eb-main">公式戦</div></div>
+      <div class="ev"><div><div class="ev-d">12</div><div class="ev-dw">SAT</div></div><div><div class="ev-name">全日本インカレ陸上競技大会</div><div class="ev-club">ATHLETICS</div></div><div class="ev-loc">国立競技場<br>09:30〜</div><div class="ev-b eb-lg">全国</div></div>
+      <div class="ev"><div><div class="ev-d">19</div><div class="ev-dw">SAT</div></div><div><div class="ev-name">夏季合宿（体育会全部 · 白山麓）</div><div class="ev-club">ALL CLUBS</div></div><div class="ev-loc">白山麓研修センター<br>2泊3日</div><div class="ev-b eb-pr">合宿</div></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-brand">金沢学院大学 <b>体育会</b></div>
+    <div class="footer-copy">© 2025 Kanazawa Gakuin University</div>
+  </footer>
+</div>
+
+<!-- ══════ NEWS ══════ -->
+<div id="page-news" class="page">
+  <div class="page-hdr" data-bg="NEWS">
+    <div class="ph-lbl">— LATEST NEWS / 学生生活 › 体育会</div>
+    <div class="ph-title">お知らせ・NEWS</div>
+  </div>
+  <div class="news-page-body">
+    <div class="news-hero">
+      <div class="np-main">
+        <div class="np-img"><div class="np-img-lbl">BREAKING — 速報</div></div>
+        <div class="np-body">
+          <div class="np-meta"><span class="np-cat">速報</span><span class="np-date">2025.06.01</span></div>
+          <div class="np-title">硬式野球部、明治神宮大会出場権を獲得。秋季北陸大学野球リーグで優勝し全国へ挑む。</div>
+        </div>
+      </div>
+      <div class="np-side">
+        <div class="nps"><div class="nps-cat">試合結果</div><div class="nps-title">サッカー部 北信越リーグ首位をキープ。第6節を2-0で快勝。</div><div class="nps-date">2025.05.28</div></div>
+        <div class="nps"><div class="nps-cat">イベント</div><div class="nps-title">2025年度 新入部員歓迎会を開催。多数の新入生が体育会へ加入。</div><div class="nps-date">2025.05.20</div></div>
+        <div class="nps"><div class="nps-cat">速報</div><div class="nps-title">チアリーディング部 全国大会出場が決定。</div><div class="nps-date">2025.05.15</div></div>
+      </div>
+    </div>
+    <div style="margin-top:1px">
+      <div class="nl"><span class="nl-dt">2025.05.10</span><span class="nl-ttl">【重要】夏季合宿（白山麓研修センター）参加申込の締切について</span><span class="ev-b eb-pr">告知</span></div>
+      <div class="nl"><span class="nl-dt">2025.05.05</span><span class="nl-ttl">ラグビー部、北信越大学選手権出場権を獲得</span><span class="ev-b eb-main">速報</span></div>
+      <div class="nl"><span class="nl-dt">2025.04.28</span><span class="nl-ttl">体育会定期総会の議事録を公開しました</span><span class="ev-b eb-pr">告知</span></div>
+      <div class="nl"><span class="nl-dt">2025.04.20</span><span class="nl-ttl">陸上競技部 佐藤選手、北信越インカレで優勝・全国大会へ</span><span class="ev-b eb-main">速報</span></div>
+      <div class="nl"><span class="nl-dt">2025.04.10</span><span class="nl-ttl">相撲部 大会参加報告 — 学生横綱を目指してさらなる高みへ</span><span class="ev-b eb-lg">報告</span></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-brand">金沢学院大学 <b>体育会</b></div>
+    <div class="footer-copy">© 2025 Kanazawa Gakuin University</div>
+  </footer>
+</div>
+
+<!-- ══════ CLUBS ══════ -->
+<div id="page-clubs" class="page">
+  <div class="page-hdr" data-bg="CLUBS">
+    <div class="ph-lbl">— CLUB GUIDE / 学生生活 › 体育会</div>
+    <div class="ph-title">クラブ紹介</div>
+  </div>
+  <div class="clubs-page-body">
+    <!-- Filter tags matching KG site's "クラブ・サークルを選ぶ" -->
+    <div class="filter-bar">
+      <button class="ftag active" onclick="filterClubs('all',this)">すべて</button>
+      <button class="ftag" onclick="filterClubs('ball',this)">球技</button>
+      <button class="ftag" onclick="filterClubs('budo',this)">武道・格闘</button>
+      <button class="ftag" onclick="filterClubs('track',this)">陸上・水泳</button>
+      <button class="ftag" onclick="filterClubs('other',this)">その他</button>
+    </div>
+
+    <div class="ci-grid" id="clubs-grid">
+      <div class="ci" data-cat="ball"><div class="ci-bg">01</div><div class="ci-tag">BASEBALL</div><div class="ci-name">硬式野球部</div><div class="ci-voice">「全国各地から選りすぐりの精鋭が集い、活動しています」</div><div class="ci-row"><div><div class="ci-sn">15</div><div class="ci-sl">全国優勝回数</div></div><div><div class="ci-sn">4</div><div class="ci-sl">全国大会出場</div></div></div></div>
+      <div class="ci" data-cat="ball"><div class="ci-bg">02</div><div class="ci-tag">SOFTBALL</div><div class="ci-name">ソフトボール部</div><div class="ci-voice">「全国大会入賞を目標に日々練習に励んでいます」</div><div class="ci-row"><div><div class="ci-sn">北信越</div><div class="ci-sl">活動地域</div></div></div></div>
+      <div class="ci" data-cat="ball"><div class="ci-bg">03</div><div class="ci-tag">SOCCER</div><div class="ci-name">サッカー部</div><div class="ci-voice">「個性を活かした全員サッカーで1部リーグの頂点を目指しています」</div><div class="ci-row"><div><div class="ci-sn">北信越</div><div class="ci-sl">1部リーグ</div></div></div></div>
+      <div class="ci" data-cat="budo"><div class="ci-bg">04</div><div class="ci-tag">KENDO</div><div class="ci-name">剣道部</div><div class="ci-voice">「日本人の品格を学ぶため日々練習に打ち込んでいます」</div><div class="ci-row"><div><div class="ci-sn">北信越</div><div class="ci-sl">制覇目標</div></div></div></div>
+      <div class="ci" data-cat="budo"><div class="ci-bg">05</div><div class="ci-tag">SUMO</div><div class="ci-name">相撲部</div><div class="ci-voice">「大相撲希望者から初心者まで、学生横綱を目指します」</div><div class="ci-row"><div><div class="ci-sn">学生</div><div class="ci-sl">横綱目標</div></div></div></div>
+      <div class="ci" data-cat="track"><div class="ci-bg">06</div><div class="ci-tag">ATHLETICS</div><div class="ci-name">陸上競技部</div><div class="ci-voice">「日本インカレ優勝、全日本大学駅伝出場を目指して日々練習に励んでいます」</div><div class="ci-row"><div><div class="ci-sn">全国</div><div class="ci-sl">大会出場</div></div></div></div>
+      <div class="ci" data-cat="track"><div class="ci-bg">07</div><div class="ci-tag">SWIMMING</div><div class="ci-name">水泳部</div><div class="ci-voice">「インカレ上位を目指し"不屈の精神"で日々練習に取り組んでいます」</div><div class="ci-row"><div><div class="ci-sn">インカレ</div><div class="ci-sl">上位目標</div></div></div></div>
+      <div class="ci" data-cat="ball"><div class="ci-bg">08</div><div class="ci-tag">BASKETBALL</div><div class="ci-name">バスケットボール部</div><div class="ci-voice">「人間力を育み、将来を見据えてバスケットボールに取り組む」</div><div class="ci-row"><div><div class="ci-sn">北信越</div><div class="ci-sl">リーグ参戦</div></div></div></div>
+      <div class="ci" data-cat="ball"><div class="ci-bg">09</div><div class="ci-tag">TENNIS</div><div class="ci-name">テニス部</div><div class="ci-voice">「基礎の充実、"心技体"を鍛錬し、北信越制覇、学生王座戦出場を目指しています」</div><div class="ci-row"><div><div class="ci-sn">北信越</div><div class="ci-sl">王座目標</div></div></div></div>
+      <div class="ci" data-cat="other"><div class="ci-bg">10</div><div class="ci-tag">GOLF</div><div class="ci-name">ゴルフ部</div><div class="ci-voice">「毎日の練習と週末はゴルフ場でラウンド。初心者も大歓迎です」</div><div class="ci-row"><div><div class="ci-sn">初心者</div><div class="ci-sl">大歓迎</div></div></div></div>
+      <div class="ci" data-cat="other"><div class="ci-bg">11</div><div class="ci-tag">CHEERLEADING</div><div class="ci-name">チアリーディング部</div><div class="ci-voice">「応援と競技の両立を目指し、日々楽しく練習しています。初心者大歓迎！」</div><div class="ci-row"><div><div class="ci-sn">全国</div><div class="ci-sl">大会出場</div></div></div></div>
+      <div class="ci" data-cat="ball"><div class="ci-bg">12</div><div class="ci-tag">TABLE TENNIS</div><div class="ci-name">卓球部</div><div class="ci-voice">「卓球好きが集まって、学業と部活動を両立しながら活動しています」</div><div class="ci-row"><div><div class="ci-sn">文武</div><div class="ci-sl">両道</div></div></div></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-brand">金沢学院大学 <b>体育会</b></div>
+    <div class="footer-copy">© 2025 Kanazawa Gakuin University</div>
+  </footer>
+</div>
+
+<script>
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function filterClubs(cat,btn){
+  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ci').forEach(card=>{
+    if(cat==='all'||card.dataset.cat===cat){
+      card.style.display='block';
+    } else {
+      card.style.display='none';
+    }
+  });
+  // reflow grid gap
+  const grid=document.getElementById('clubs-grid');
+  grid.style.display='none';
+  requestAnimationFrame(()=>{grid.style.display='grid';});
+}
+</script>
+</body>
+</html>
